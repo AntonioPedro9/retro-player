@@ -3,6 +3,8 @@ let uniqueFoldersList = [];
 let selectedRootDirectory = "";
 let currentTrackIndex = 0;
 let isAudioPlaying = false;
+let isShuffleActive = false;
+let isLoopActive = false;
 let audioPlayerInstance = null;
 let albumNameDisplayTimeout = null;
 let isDisplayingAlbumTemporarily = false;
@@ -35,8 +37,22 @@ function toggleAudioPlaybackState() {
 function playNextAudioTrack() {
   const isPlaylistEmpty = audioPlaylist.length === 0;
   if (isPlaylistEmpty) return;
+
   cancelTemporaryAlbumDisplay();
-  currentTrackIndex = (currentTrackIndex + 1) % audioPlaylist.length;
+
+  if (isLoopActive) {
+    loadAudioTrackByIndex(currentTrackIndex);
+    refreshPlayerScreenDisplay();
+    return;
+  }
+
+  if (isShuffleActive) {
+    randomTrackIndex = Math.floor(Math.random() * audioPlaylist.length);
+    currentTrackIndex = randomTrackIndex;
+  } else {
+    currentTrackIndex = (currentTrackIndex + 1) % audioPlaylist.length;
+  }
+
   loadAudioTrackByIndex(currentTrackIndex);
   refreshPlayerScreenDisplay();
 }
@@ -53,7 +69,13 @@ function playPreviousAudioTrack() {
     return;
   }
 
-  currentTrackIndex = (currentTrackIndex - 1 + audioPlaylist.length) % audioPlaylist.length;
+  if (isShuffleActive) {
+    randomTrackIndex = Math.floor(Math.random() * audioPlaylist.length);
+    currentTrackIndex = randomTrackIndex;
+  } else {
+    currentTrackIndex = (currentTrackIndex - 1 + audioPlaylist.length) % audioPlaylist.length;
+  }
+
   loadAudioTrackByIndex(currentTrackIndex);
   refreshPlayerScreenDisplay();
 }
@@ -101,32 +123,47 @@ function loadAudioTrackByIndex(trackIndex) {
   });
 }
 
-function displayAlbumNameTemporarily(folderPath) {
+function displayTemporaryMessage(messageText, duration = 1500) {
   if (albumNameDisplayTimeout) {
     clearTimeout(albumNameDisplayTimeout);
   }
 
-  let albumName = "";
-  const isSelectedRootFolder = folderPath === selectedRootDirectory;
-  if (isSelectedRootFolder) albumName = "ROOT";
-  else albumName = removeAccents(getFolderNameFromFolderPath(folderPath));
-
   const isScreenElementAvailable = !!screenTextElement;
-  if (isScreenElementAvailable) screenTextElement.innerText = albumName;
+  if (isScreenElementAvailable) {
+    screenTextElement.innerText = messageText;
+  }
 
   applyScreenTextScrollEffect();
-
   isDisplayingAlbumTemporarily = true;
-
-  const playerScreenContainer = document.getElementById("player-screen");
-  const isScreenTextScrolling =
-    playerScreenContainer && playerScreenContainer.classList.contains("has-horizontal-scroll");
-  const displayDuration = isScreenTextScrolling ? 10000 : 2500;
 
   albumNameDisplayTimeout = setTimeout(() => {
     isDisplayingAlbumTemporarily = false;
     refreshPlayerScreenDisplay();
-  }, displayDuration);
+  }, duration);
+}
+
+function displayAlbumNameTemporarily(folderPath) {
+  let albumName = "";
+
+  const isSelectedRootFolder = folderPath === selectedRootDirectory;
+  if (isSelectedRootFolder) {
+    albumName = "ROOT";
+  } else {
+    albumName = removeAccents(getFolderNameFromFolderPath(folderPath));
+  }
+
+  const isScreenElementAvailable = !!screenTextElement;
+  if (isScreenElementAvailable) {
+    screenTextElement.innerText = albumName;
+  }
+
+  applyScreenTextScrollEffect();
+
+  const playerScreenContainer = document.getElementById("player-screen");
+  const isScreenTextScrolling = playerScreenContainer.classList.contains("has-horizontal-scroll");
+  const displayDuration = isScreenTextScrolling ? 10000 : 2500;
+
+  displayTemporaryMessage(albumName, displayDuration);
 }
 
 function cancelTemporaryAlbumDisplay() {
@@ -170,4 +207,14 @@ function indexOfCurrentFolder() {
     break;
   }
   return currentFolderIdx;
+}
+
+function toggleShuffleState() {
+  isShuffleActive = !isShuffleActive;
+  displayTemporaryMessage(isShuffleActive ? "SHUFFLE ON" : "SHUFFLE OFF", 1500);
+}
+
+function toggleLoopState() {
+  isLoopActive = !isLoopActive;
+  displayTemporaryMessage(isLoopActive ? "LOOP ON" : "LOOP OFF", 1500);
 }

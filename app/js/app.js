@@ -4,9 +4,18 @@ const nextTrackButton = document.getElementById("track-next");
 const prevTrackButton = document.getElementById("track-prev");
 const folderUpButton = document.getElementById("folder-up");
 const folderDownButton = document.getElementById("folder-down");
+const shuffleButton = document.getElementById("shuffle");
+const loopButton = document.getElementById("loop");
 
 let oneOrMoreButtonsMissing =
-  !srcButton || !playPauseButton || !nextTrackButton || !prevTrackButton || !folderUpButton || !folderDownButton;
+  !srcButton ||
+  !playPauseButton ||
+  !nextTrackButton ||
+  !prevTrackButton ||
+  !folderUpButton ||
+  !folderDownButton ||
+  !shuffleButton ||
+  !loopButton;
 if (oneOrMoreButtonsMissing) {
   console.error("One or more button elements not found in the DOM");
 }
@@ -51,5 +60,7 @@ nextTrackButton.addEventListener("click", () => playNextAudioTrack());
 prevTrackButton.addEventListener("click", () => playPreviousAudioTrack());
 folderUpButton.addEventListener("click", () => playPreviousFolder());
 folderDownButton.addEventListener("click", () => playNextFolder());
+shuffleButton.addEventListener("click", () => toggleShuffleState());
+loopButton.addEventListener("click", () => toggleLoopState());
 
 applyScreenTextScrollEffect();
