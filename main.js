@@ -1,6 +1,11 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("node:path");
 
+// Enable live reload in development
+try {
+  require("electron-reloader")(module);
+} catch (_) {}
+
 const createWindow = () => {
   const win = new BrowserWindow({
     width: 711,
