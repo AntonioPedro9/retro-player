@@ -10,23 +10,14 @@
   </head>
   <body>
     <div class="player-container">
-      <svg id="src" viewBox="0 0 711 219" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="50,35 130,35 85,79 45,79" />
-      </svg>
-      <svg id="track-prev" viewBox="0 0 711 219" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="195,165 165,183 225,183 225,165" />
-      </svg>
-      <svg id="track-next" viewBox="0 0 711 219" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="225,165 225,183 258,183 272,165" />
-      </svg>
-      <svg id="folder-up" viewBox="0 0 711 219" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="302,165 289,183 317,183 330,165" />
-      </svg>
-      <svg id="folder-down" viewBox="0 0 711 219" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="352,165 339,183 367,183 380,165" />
-      </svg>
-      <svg id="play-pause" viewBox="0 0 711 219" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="460,165 445,183 473,183 488,165" />
+      <div id="player-screen"></div>
+      <svg class="player-controls" viewBox="0 0 711 219" xmlns="http://www.w3.org/2000/svg">
+        <polygon id="src" points="50,35 130,35 85,79 45,79" />
+        <polygon id="track-prev" points="195,165 165,183 225,183 225,165" />
+        <polygon id="track-next" points="225,165 225,183 258,183 272,165" />
+        <polygon id="folder-up" points="302,165 289,183 317,183 330,165" />
+        <polygon id="folder-down" points="352,165 339,183 367,183 380,165" />
+        <polygon id="play-pause" points="460,165 445,183 473,183 488,165" />
       </svg>
   </body>
   <script src="./renderer.js"></script>

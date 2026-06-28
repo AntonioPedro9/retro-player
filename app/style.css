@@ -66,14 +66,17 @@ body {
   -webkit-app-region: drag;
 }
 
-#src,
-#track-prev,
-#track-next,
-#folder-up,
-#folder-down,
-#play-pause,
-#volume-up,
-#volume-down {
+#player-screen {
+  position: absolute;
+  top: 66px;
+  left: 323px;
+  width: 259px;
+  height: 65px;
+  background-color: #333;
+  border-radius: 4px;
+}
+
+.player-controls {
   position: absolute;
   top: 0;
   left: 0;
@@ -83,7 +86,5 @@ body {
 
 polygon {
   fill: rgba(255, 0, 0, 0);
-  pointer-events: auto;
-  cursor: pointer;
   -webkit-app-region: no-drag;
 }
