@@ -82,8 +82,43 @@ body {
   left: 323px;
   width: 259px;
   height: 65px;
-  background-color: #333;
+  background-color: #111;
   border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #222;
+  overflow: hidden;
+}
+
+#screen-text {
+  color: #74c1d5;
+  font-family: "DS-Digital", sans-serif;
+  font-size: 48px;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  display: block;
+}
+
+#player-screen.has-horizontal-scroll {
+  justify-content: flex-start;
+}
+
+#player-screen.has-horizontal-scroll #screen-text {
+  animation: marquee 10s linear infinite;
+  text-align: left;
+  padding-left: 245px;
+  width: auto;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
 }
 
 .player-controls {
