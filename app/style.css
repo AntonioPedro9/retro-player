@@ -1,0 +1,89 @@
+@font-face {
+  font-family: "DS-Digital";
+  src: url("./fonts/DS-DIGI.TTF") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DS-Digital";
+  src: url("./fonts/DS-DIGIB.TTF") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "DS-Digital";
+  src: url("./fonts/DS-DIGII.TTF") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "DS-Digital";
+  src: url("./fonts/DS-DIGIT.TTF") format("truetype");
+  font-weight: bold;
+  font-style: italic;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "DS-Digital";
+}
+
+body {
+  background-color: transparent;
+  color: #fff;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-container {
+  position: relative;
+  width: 18.8cm;
+  height: 5.8cm;
+  background-image: url("./assets/player.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  user-select: none;
+  border-radius: 8px;
+  -webkit-app-region: drag;
+}
+
+#src,
+#track-prev,
+#track-next,
+#folder-up,
+#folder-down,
+#play-pause,
+#volume-up,
+#volume-down {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+polygon {
+  fill: rgba(255, 0, 0, 0);
+  pointer-events: auto;
+  cursor: pointer;
+  -webkit-app-region: no-drag;
+}

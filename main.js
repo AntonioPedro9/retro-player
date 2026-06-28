@@ -3,14 +3,17 @@ const path = require("node:path");
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 711,
+    height: 219,
+    resizable: false,
+    frame: false,
+    transparent: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
   });
 
-  win.loadFile("index.html");
+  win.loadFile(path.join(__dirname, "app/index.html"));
 };
 
 // This method will be called when Electron has finished
