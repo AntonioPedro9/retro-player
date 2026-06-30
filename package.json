@@ -1,16 +1,52 @@
 {
   "name": "retro-player",
   "version": "1.0.0",
-  "description": "",
+  "description": "A retro-themed audio player built with Electron",
   "main": "./src/main/main.js",
+  "desktopName": "retro-player.desktop",
   "scripts": {
     "start": "electron . --no-sandbox",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
-  "author": "Antônio Pedro",
+  "author": "Antônio Pedro <antoniopedro.rs9@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "electron": "^41.7.1",
+    "electron-builder": "^26.15.3",
     "electron-reloader": "^1.2.3"
+  },
+  "build": {
+    "appId": "com.antoniopedro.retro-player",
+    "productName": "Retro Player",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "icon": "assets/icon.icns",
+      "target": [
+        "dmg"
+      ]
+    },
+    "win": {
+      "icon": "assets/icon.ico",
+      "target": [
+        "nsis"
+      ]
+    },
+    "linux": {
+      "icon": "assets/icon.png",
+      "category": "Audio",
+      "syncDesktopName": true,
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    }
   }
 }
