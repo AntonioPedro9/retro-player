@@ -1,4 +1,5 @@
 const srcButton = document.getElementById("src");
+const volumeControlCircle = document.getElementById("volume-control");
 const playPauseButton = document.getElementById("play-pause");
 const nextTrackButton = document.getElementById("track-next");
 const prevTrackButton = document.getElementById("track-prev");
@@ -9,6 +10,7 @@ const loopButton = document.getElementById("loop");
 
 let oneOrMoreButtonsMissing =
   !srcButton ||
+  !volumeControlCircle ||
   !playPauseButton ||
   !nextTrackButton ||
   !prevTrackButton ||
@@ -62,5 +64,10 @@ folderUpButton.addEventListener("click", () => playPreviousFolder());
 folderDownButton.addEventListener("click", () => playNextFolder());
 shuffleButton.addEventListener("click", () => toggleShuffleState());
 loopButton.addEventListener("click", () => toggleLoopState());
+volumeControlCircle.addEventListener("wheel", (event) => {
+  event.preventDefault();
+  const direction = event.deltaY < 0 ? 1 : -1;
+  adjustVolume(direction);
+});
 
 applyScreenTextScrollEffect();

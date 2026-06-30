@@ -8,6 +8,7 @@ let isLoopActive = false;
 let audioPlayerInstance = null;
 let albumNameDisplayTimeout = null;
 let isDisplayingAlbumTemporarily = false;
+let currentVolume = 100;
 
 function toggleAudioPlaybackState() {
   const isPlaylistEmpty = audioPlaylist.length === 0;
@@ -112,6 +113,7 @@ function loadAudioTrackByIndex(trackIndex) {
 
   const secureMediaSourceUrl = "media://local-file/" + encodeURIComponent(selectedTrackPath);
   audioPlayerInstance = new Audio(secureMediaSourceUrl);
+  audioPlayerInstance.volume = currentVolume / 100;
   audioPlayerInstance.addEventListener("ended", () => playNextAudioTrack());
 
   isAudioPlaying = true;
@@ -217,4 +219,11 @@ function toggleShuffleState() {
 function toggleLoopState() {
   isLoopActive = !isLoopActive;
   displayTemporaryMessage(isLoopActive ? "LOOP ON" : "LOOP OFF", 1500);
+}
+
+function adjustVolume(direction) {
+  const volumeStep = 5;
+  currentVolume = Math.min(100, Math.max(0, currentVolume + direction * volumeStep));
+  if (audioPlayerInstance) audioPlayerInstance.volume = currentVolume / 100;
+  displayTemporaryMessage("VOL " + currentVolume, 1500);
 }
