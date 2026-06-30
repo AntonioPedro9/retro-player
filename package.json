@@ -47,6 +47,8 @@
         "AppImage",
         "deb"
       ]
-    }
+    },
+    "compression": "maximum",
+    "asar": true
   }
 }
