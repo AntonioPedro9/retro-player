@@ -15,7 +15,7 @@ const createMainWindowInstance = () => {
     },
   });
 
-  mainWindowInstance.loadFile(path.join(__dirname, "../app/index.html"));
+  mainWindowInstance.loadFile(path.join(__dirname, "../renderer/index.html"));
 };
 
 const getMainWindowInstance = () => mainWindowInstance;

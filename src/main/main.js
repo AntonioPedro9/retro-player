@@ -1,7 +1,7 @@
 const { app, BrowserWindow } = require("electron");
-const { registerMediaProtocol, handleMediaProtocol } = require("./main/protocol");
-const { initIpcHandlers } = require("./main/ipc");
-const { createMainWindowInstance } = require("./main/window");
+const { registerMediaProtocol, handleMediaProtocol } = require("./protocol");
+const { initIpcHandlers } = require("./ipc");
+const { createMainWindowInstance } = require("./window");
 
 // Enable live reload in development
 try {
